@@ -1,0 +1,44 @@
+#include <iostream>
+#include <list>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+	string line;
+	while(getline(cin, line))
+	{
+		list<char> lst;
+		auto it = lst.begin();
+		if(line.find("]") == string::npos and line.find("[") == string::npos)
+		{
+			cout << line << endl;
+		}
+		else 
+		{
+			for(int i = 0; i < line.size(); ++i)
+			{
+				if(line[i] == '[')
+				{
+					it = lst.begin();
+				} 
+				else if(line[i] == ']')
+				{
+					it = lst.end();
+				}
+				else
+				{
+					lst.insert(it, line[i]);
+				}
+			}
+			for(auto it = lst.begin(); it != lst.end(); ++it)
+			{
+				cout << *it;
+			}
+			cout << endl;
+		}
+	}
+		
+	return 0;
+}
