@@ -1,0 +1,31 @@
+#include <iostream>
+#include <set>
+#include <vector>
+
+using namespace std;
+
+int main()
+{
+	set<string> input;
+	string word1, word2;
+	while(cin >> word1) 
+	{
+		input.insert(word1);
+	}
+	
+	for(auto it = input.begin(); it != input.end(); ++it)
+	{
+		int wordLength = (*it).size();
+		for(int i = 0; i < wordLength - 1; ++i)
+		{
+			word1 = (*it).substr(0, i + 1);
+            word2 = (*it).substr(i + 1, wordLength - i);
+			if(input.find(word1) != input.end() && input.find(word2) != input.end())
+			{
+				cout << *it << endl;
+				break;
+			}
+		}
+	}
+	return 0;
+}
