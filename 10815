@@ -1,0 +1,37 @@
+#include <iostream>  
+#include <locale>
+#include <set>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+	set<string> mySet;
+	char ch;
+	string word = "";
+	while(cin.get(ch))
+	{
+		if(isalpha(ch))
+		{
+			word += tolower(ch);
+		}
+		else
+		{
+			if(!word.empty())
+			{
+				mySet.insert(word);
+				word.clear();
+			}
+		}
+	}
+	if(!word.empty())
+	{
+		mySet.insert(word);
+	}
+	for(auto it = mySet.begin(); it != mySet.end(); ++it)
+	{
+		cout << *it << endl;
+	}
+	return 0;
+}
