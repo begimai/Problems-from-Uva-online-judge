@@ -1,0 +1,37 @@
+#include <iostream>  
+#include <unordered_set>
+
+using namespace std;
+
+int main()
+{
+	int N, M; cin >> N >> M;
+	while(true)
+	{
+		if(N == 0 && M == 0)
+		{
+			break;
+		}
+		
+		unordered_set<int> mySet;
+		int counter = 0, temp;
+		
+		for(int i = 0; i < N; ++i)
+		{
+			cin >> temp;
+			mySet.insert(temp);
+		}		
+		for(int i = 0; i < M; ++i)
+		{
+			cin >> temp;
+			if(mySet.find(temp) != mySet.end())
+			{
+				++counter;
+			}		
+		}
+		cout << counter << endl;
+		cin >> N >> M;
+	}
+	
+	return 0;
+}
