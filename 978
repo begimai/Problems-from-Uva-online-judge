@@ -1,0 +1,91 @@
+#include <iostream>
+#include <set>
+#include <vector>
+
+using namespace std;
+
+int main()
+{
+	int numOfTestCases;
+	cin >> numOfTestCases;
+	for(int i = 0; i < numOfTestCases; ++i)
+	{
+		multiset<int> setForGreen; 
+		multiset<int> setForBlue; 
+		int Battlefields, GreenTeam, BlueTeam;
+		
+		cin >> Battlefields >> GreenTeam >> BlueTeam;
+		for(int j = 0; j < GreenTeam; ++j)
+		{
+			int temp; cin >> temp;
+			setForGreen.insert(temp);
+		}
+		for(int j = 0; j < BlueTeam; ++j)
+		{
+			int temp; cin >> temp;
+			setForBlue.insert(temp);
+		}
+		
+		while(setForBlue.size() > 0 && setForGreen.size() > 0)
+		{
+			vector<int> vectorForGreen; 
+			vector<int> vectorForBlue; 
+			for(int j = 0; j < Battlefields; ++j)
+			{
+				if(setForBlue.size() == 0 || setForGreen.size() == 0)
+				{
+					break;
+				}
+				
+				auto itForGreen = setForGreen.rbegin();
+				auto itForBlue = setForBlue.rbegin();
+				
+				if(*itForBlue < *itForGreen)
+				{
+					vectorForGreen.push_back(*itForGreen - *itForBlue);
+				}				
+				else if(*itForBlue > *itForGreen)
+				{
+					vectorForBlue.push_back(*itForBlue - *itForGreen);
+				}
+				setForBlue.erase((++itForBlue).base());
+				setForGreen.erase((++itForGreen).base());
+			}
+			
+			for (int j = 0; j < vectorForGreen.size(); ++j)
+			{
+				setForGreen.insert(vectorForGreen[j]);
+			}
+
+			for (int j = 0; j < vectorForBlue.size(); ++j)
+			{
+				setForBlue.insert(vectorForBlue[j]);
+			}
+		}
+		if(setForBlue.size() > 0 && setForGreen.empty())
+		{
+			cout << "blue wins" << endl;
+			for(auto it = setForBlue.rbegin(); it != setForBlue.rend(); ++it)
+			{
+				cout << *it << endl;
+			}
+		}
+		else if(setForGreen.size() > 0 && setForBlue.empty())
+		{
+			cout << "green wins" << endl;
+			for(auto it = setForGreen.rbegin(); it != setForGreen.rend(); ++it)
+			{
+				cout << *it << endl;
+			}
+		}
+		else 
+		{
+			cout << "green and blue died" << endl;
+		}
+		if(i < numOfTestCases - 1)
+		{
+			cout << endl;
+		}
+	}
+	return 0;
+}
