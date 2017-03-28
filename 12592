@@ -1,0 +1,28 @@
+#include <iostream> 
+#include <string> 
+#include <unordered_map>
+
+using namespace std;
+
+int main()
+{
+	unordered_map<string, string> myMap;
+	string firstLine, secondLine;
+	int N; cin >> N;
+	getchar();
+	for(int i = 0; i < N; ++i)
+	{
+		getline(cin, firstLine);
+		getline(cin, secondLine);
+		myMap[firstLine] = secondLine;
+	}
+	int Q; cin >> Q;
+	getchar();
+	for(int i = 0; i < Q; ++i)
+	{
+		getline(cin, firstLine);
+		auto it = myMap.find(firstLine);
+		cout << it->second << endl;
+	}
+	return 0;
+}
