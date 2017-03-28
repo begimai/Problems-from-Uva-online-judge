@@ -1,0 +1,37 @@
+#include <iostream>  
+#include <unordered_map>
+#include <string>
+#include <sstream>
+
+using namespace std;
+
+int main()
+{
+	string line, key, value;
+	unordered_map<string, string> myMap;
+	while(getline(cin, line))
+	{
+		if(line.length() == 0)
+		{
+			string word;
+			while(getline(cin, word))
+			{
+				auto it = myMap.find(word);
+				if(it == myMap.end())
+				{
+					cout << "eh" << endl;
+				}
+				else
+				{
+					cout << it->second << endl;
+				}
+			}
+		}
+		
+		istringstream sstr;
+		sstr.str(line);
+		sstr >> value >> key;
+		myMap.insert(make_pair(key, value));
+	}
+	return 0;
+}
