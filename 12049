@@ -1,0 +1,36 @@
+#include <cmath>  
+#include <iostream>  
+#include <unordered_map>
+
+using namespace std;
+
+int main()
+{
+	int T; cin >> T;
+	for(int i = 0; i < T; ++i)
+	{
+		unordered_map<int, int> myMap;
+		myMap.clear();
+		int N, M, number; cin >> N >> M;
+		for(int j = 0; j < N; ++j)
+		{
+			cin >> number;
+			myMap[number]++;
+		}
+		for(int j = 0; j < M; ++j)
+		{
+			cin >> number;
+			myMap[number]--;
+		}
+		
+		number = 0;
+		for(auto it = myMap.begin(); it != myMap.end(); ++it)
+		{
+			number += abs((*it).second);
+		}
+		
+		cout << number << endl;
+	}
+	
+	return 0;
+}
