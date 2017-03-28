@@ -1,0 +1,39 @@
+#include <iostream> 
+#include <string> 
+#include <unordered_map>
+
+using namespace std;
+
+int main()
+{
+	int T; cin >> T;
+	for(int i = 0; i < T; ++i)
+	{
+		unordered_map<string, int> myMap;
+		int N; cin >> N;
+		for(int j = 0; j < N; ++j)
+		{
+			string name;
+			int days;
+			cin >> name >> days;
+			myMap[name] = days;
+		}
+		int D; cin >> D;
+		string name; cin >> name;
+		auto it = myMap.find(name);
+		cout << "Case " << i + 1 << ": ";
+		if(it != myMap.end() && it->second <= D)
+		{
+			cout << "Yesss" << endl;
+		}
+		else if(it != myMap.end() && (it->second - D) < 6)
+		{
+			cout << "Late" << endl; 
+		}
+		else 
+		{
+			cout << "Do your own homework!" << endl;
+		}
+	}
+	return 0;
+}
