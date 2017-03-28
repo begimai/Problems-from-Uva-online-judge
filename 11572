@@ -1,0 +1,41 @@
+#include <iostream>  
+#include <unordered_map>
+
+using namespace std;
+
+int main()
+{
+	int t; cin >> t;
+	for(int i = 0; i < t; ++i)
+	{
+		unordered_map<int, int> myMap;
+		int n, highest = 0; cin >> n;
+		for(int j = 0; j < n; ++j)
+		{
+			int snowflake; cin >> snowflake;
+			auto tempPtr = myMap.find(snowflake);
+			if(tempPtr != myMap.end())
+			{
+				for (auto it = myMap.begin(); it != myMap.end();)
+				{
+					if(it->second <= tempPtr->second)
+					{
+						myMap.erase(it++);
+					}
+					else
+					{
+						++it;
+					}
+				}
+			}
+			myMap[snowflake] = j + 1;
+			if(myMap.size() > highest)
+			{
+				highest = myMap.size();
+				
+			}
+		}
+		cout << highest <<endl;
+	}
+	return 0;
+}
